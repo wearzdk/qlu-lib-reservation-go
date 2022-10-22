@@ -8,7 +8,10 @@
 *.dll
 *.so
 *.dylib
-
+ocr
+code.png
+服务模式.bat
+config
 # Test binary, built with `go test -c`
 *.test
 
