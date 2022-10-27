@@ -38,7 +38,7 @@ func GetPicCode(file []byte) string {
 			log.Error(err, "保存验证码失败")
 		}
 		// 检测是否存在本地ocr
-		if _, err = os.Stat("orc/tesseract.exe"); os.IsNotExist(err) {
+		if _, err = os.Stat("ocr/tesseract.exe"); os.IsNotExist(err) {
 			log.Error(errors.New("未找到本地ocr"), "请打开程序目录下的code.png手动输入验证码")
 			var code string
 			_, err = fmt.Scanln(&code)

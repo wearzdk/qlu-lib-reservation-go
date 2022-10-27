@@ -329,7 +329,11 @@ func GetAreaInfo(areaId int) (*AreaInfoResponse, error) {
 	}
 	err = json.Unmarshal(resp.Body(), &areaInfoResponse)
 	if err != nil {
+		log.Error(err)
 		return nil, err
+	}
+	if areaInfoResponse.Status != 1 {
+		return nil, errors.New(areaInfoResponse.Msg)
 	}
 	return &areaInfoResponse, nil
 }

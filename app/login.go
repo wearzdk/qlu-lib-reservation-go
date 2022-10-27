@@ -226,7 +226,7 @@ func Login() {
 func CheckLoginExpire() bool {
 	userInfo := LoadUserConfig()
 	// 获取当前时间戳
-	now := time.Now().Add(time.Second * 600).Unix()
+	now := time.Now().Add(time.Minute * 20).Unix()
 	// 格式化时间
 	parse, err := time.Parse("2006-01-02 15:04:05", userInfo.Expire)
 	//log.Debug(userInfo.Expire, parse.Unix(), now)

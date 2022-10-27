@@ -1,0 +1,81 @@
+INFO: 程序启动
+INFO: 执行校园网认证
+INFO: 校园网登录成功!
+INFO: 初始化网络请求...
+INFO: 正在初始化区域列表信息....
+INFO: 等待预约中...
+INFO: 执行定时任务
+INFO: 预约开始时间：00:00:00
+INFO: 检查网络连接...
+INFO: 距离预约时间还有1830秒
+
+INFO: 网络连接正常
+WARNING: 登录已过期 尝试重新登陆...
+INFO: 已加载配置： 用户名：202103160060 密码：qlu185991
+INFO: PHPSESSID为：1q4fhgfoobb4es11o0jcmrigq5
+DEBUG: [使用本地ocr]
+ERROR: [请打开程序目录下的code.png手动输入验证码] 未找到本地ocr
+ERROR: [输入验证码失败] unexpected newline
+INFO: 验证码为：
+WARNING: 识别失败，重新识别
+INFO: PHPSESSID为：1q4fhgfoobb4es11o0jcmrigq5
+DEBUG: [使用本地ocr]
+ERROR: [请打开程序目录下的code.png手动输入验证码] 未找到本地ocr
+INFO: 距离预约时间还有1820秒
+
+INFO: 距离预约时间还有1810秒
+
+INFO: 验证码为：7120
+INFO: 正在登录...7120
+INFO: 登录成功
+INFO: 用户信息已保存至userInfo.json
+INFO: 正在更新可预约时间段
+INFO: 可预约时间段更新完成
+INFO: 距离预约时间还有1800秒
+
+INFO: 距离预约时间还有1790秒
+
+INFO: 距离预约时间还有1780秒
+
+INFO: 程序启动
+INFO: 执行校园网认证
+INFO: 校园网登录成功!
+INFO: 初始化网络请求...
+INFO: 正在初始化区域列表信息....
+INFO: 已加载配置： 用户名：202103160060 密码：qlu185991
+INFO: PHPSESSID为：h278bn4ipe0p66eu5oltlqekv6
+DEBUG: [使用本地ocr]
+ERROR: [请打开程序目录下的code.png手动输入验证码] 未找到本地ocr
+ERROR: [输入验证码失败] unexpected newline
+INFO: 验证码为：
+WARNING: 识别失败，重新识别
+INFO: PHPSESSID为：h278bn4ipe0p66eu5oltlqekv6
+DEBUG: [使用本地ocr]
+ERROR: [请打开程序目录下的code.png手动输入验证码] 未找到本地ocr
+INFO: 程序启动
+INFO: 执行校园网认证
+INFO: 校园网登录成功!
+INFO: 初始化网络请求...
+INFO: 正在初始化区域列表信息....
+INFO: 已加载配置： 用户名：202103160060 密码：qlu185991
+INFO: PHPSESSID为：qvi4i197j5lslqm96d58cf3qc5
+DEBUG: [使用本地ocr]
+INFO: 验证码为：2931
+INFO: 正在登录...2931
+WARNING: 登录失败
+WARNING: 错误信息：验证码错误，请重新输入
+INFO: PHPSESSID为：qvi4i197j5lslqm96d58cf3qc5
+INFO: PHPSESSID为：qvi4i197j5lslqm96d58cf3qc5
+DEBUG: [使用本地ocr]
+INFO: 验证码为：96
+WARNING: 识别失败，重新识别
+INFO: PHPSESSID为：qvi4i197j5lslqm96d58cf3qc5
+DEBUG: [使用本地ocr]
+INFO: 验证码为：232
+WARNING: 识别失败，重新识别
+INFO: PHPSESSID为：qvi4i197j5lslqm96d58cf3qc5
+DEBUG: [使用本地ocr]
+INFO: 验证码为：4077
+INFO: 正在登录...4077
+INFO: 登录成功
+INFO: 用户信息已保存至userInfo.json

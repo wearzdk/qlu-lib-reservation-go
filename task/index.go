@@ -10,7 +10,7 @@ import (
 
 // 定时任务
 
-// DailyTask 每日0.30时任务
+// DailyTask 每日5.45时任务
 func DailyTask() {
 	// 加载用户配置
 	app.ReloadUserConfig()
@@ -20,6 +20,9 @@ func DailyTask() {
 	app.UpdateSegmentList()
 	// 预约时间更新
 	app.ReserveTime = time.Now().AddDate(0, 0, 1)
+	// 登录
+	app.Login()
+
 }
 
 // NetworkCheck 网络检测
@@ -69,13 +72,18 @@ func CheckReserveTime() {
 }
 
 func BootStrap() {
-	// 每日0.30时任务
+	// 每日5.45时任务
 	go func() {
 		for {
 			now := time.Now()
-			// 获取明天0.30时
-			tomorrow := time.Date(now.Year(), now.Month(), now.Day(), 0, 30, 0, 0, now.Location()).AddDate(0, 0, 1)
-			time.Sleep(tomorrow.Sub(now))
+			// 如果在5.45之前
+			if now.Hour() < 5 || (now.Hour() == 5 && now.Minute() < 45) {
+				// 等待到5.45
+				time.Sleep(time.Duration(5-now.Hour())*time.Hour + time.Duration(45-now.Minute())*time.Minute)
+			} else {
+				// 等待到第二天5.45
+				time.Sleep(time.Duration(24-now.Hour()+5)*time.Hour + time.Duration(45-now.Minute())*time.Minute)
+			}
 			// 执行任务
 			DailyTask()
 		}

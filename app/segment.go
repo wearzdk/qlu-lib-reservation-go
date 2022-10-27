@@ -46,7 +46,15 @@ func UpdateSegmentList() {
 	// 遍历区域
 	for _, area := range areaList {
 		// 获取可预约时间段
-		AreaSegmentRes, _ := GetAreaSegment(area.AreaId)
+		AreaSegmentRes, err := GetAreaSegment(area.AreaId)
+		if err != nil {
+			log.Error(err, "获取区域可预约时间段失败")
+			continue
+		}
+		if AreaSegmentRes.Status != 1 {
+			log.Error(err, AreaSegmentRes.Msg)
+			continue
+		}
 		// 遍历时间段
 		for _, segment := range AreaSegmentRes.Data.List {
 			// 添加到列表

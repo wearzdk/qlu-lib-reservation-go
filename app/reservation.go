@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/fatih/color"
+	"math/rand"
 	"strconv"
 	"strings"
 	"time"
@@ -144,7 +145,8 @@ func WaitForReservation() {
 				go func(areaId int, seatId int) {
 					reservationResultChan <- Reserve(areaId, seatId)
 				}(reservation.AreaId, seatId)
-				time.Sleep(time.Millisecond * 300)
+				// 随机等待2-7秒
+				time.Sleep(time.Duration(rand.Intn(5)+2) * time.Second)
 				if isSuccess {
 					break
 				}
@@ -229,6 +231,10 @@ func Reserve(areaId, seatId int) bool {
 	if err != nil {
 		log.Warning("预约失败,请求时发生错误")
 		log.Error(err)
+		return false
+	}
+	if reserveResponse == nil {
+		log.Warning("预约失败,返回结果为空")
 		return false
 	}
 	// 预约成功

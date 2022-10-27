@@ -5,6 +5,7 @@ import (
 	"QluTakeLesson/utils/log"
 	"encoding/json"
 	"math/rand"
+	"time"
 )
 
 // 区域数据
@@ -45,12 +46,36 @@ func FetchAreaList() {
 	log.Info("正在更新区域列表信息")
 	// 先清空
 	areas = []Area{}
-	// 获取区域列表
-	areaList, _ := GetAreasState()
+	var areaList *AreasStateResponse
+	var err error
+	for {
+		// 获取区域列表
+		areaList, err = GetAreasState()
+		if err != nil {
+			log.Error(err, "获取区域列表失败 正在重试")
+			time.Sleep(time.Second * 5)
+			continue
+		}
+		if areaList == nil {
+			log.Error(err, "获取区域列表失败 正在重试")
+			time.Sleep(time.Second * 5)
+			continue
+		}
+		break
+	}
 	for _, l1Area := range areaList.Data.List.ChildArea {
 		if l1Area.Type == 1 {
 			// 获取座位列表
-			seatListRes, _ := GetAreaInfo(l1Area.Id)
+			seatListRes, err := GetAreaInfo(l1Area.Id)
+			if err != nil {
+				log.Error(err, "获取区域列表信息失败，正在重试")
+				continue
+			}
+			if seatListRes == nil {
+				log.Warning("获取区域列表信息失败，正在重试")
+				continue
+			}
+			// 添加区域
 			var seatList []Seat
 			for _, seat := range seatListRes.Data.List {
 				seatList = append(seatList, Seat{
