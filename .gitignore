@@ -10,6 +10,7 @@
 *.dylib
 ocr/*
 code.png
+log.txt
 服务模式.bat
 config/*
 # Test binary, built with `go test -c`
