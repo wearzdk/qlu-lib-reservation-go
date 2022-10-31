@@ -145,13 +145,18 @@ func WaitForReservation() {
 				go func(areaId int, seatId int) {
 					reservationResultChan <- Reserve(areaId, seatId)
 				}(reservation.AreaId, seatId)
-				// 随机等待2-7秒
-				time.Sleep(time.Duration(rand.Intn(5)+2) * time.Second)
+				// 随机等待1-2秒
+				time.Sleep(time.Duration(rand.Intn(1)+1) * time.Second)
 				if isSuccess {
 					break
 				}
 			}
 			if isSuccess {
+				break
+			}
+			// 如果已经预约30分钟，则停止预约
+			if time.Now().Sub(ReserveTime).Minutes() > 30 {
+				log.Info("已经预约30分钟，停止预约")
 				break
 			}
 		}
@@ -247,7 +252,11 @@ func Reserve(areaId, seatId int) bool {
 		config.SaveConfig()
 		return true
 	} else {
-		color.Cyan(reserveResponse.Msg)
+		log.Warning(reserveResponse.Msg)
+		if reserveResponse.Msg == "没有登录或登录已超时" {
+			// 重新登录
+			Login()
+		}
 		return false
 	}
 }

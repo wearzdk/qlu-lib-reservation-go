@@ -9,70 +9,53 @@ import (
 
 // 日志
 
-type log struct {
-	Info string
-	Type string
-}
-
-var logs []log
+var logFile *os.File
 
 func init() {
-	logs = []log{}
-	WriteLog()
-	// 每隔一分钟写入一次日志
-	go func() {
-		for {
-			WriteLog()
-			time.Sleep(time.Minute)
-		}
-	}()
-
+	// 打开文件
+	var err error
+	logFile, err = os.OpenFile("log.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 }
 
 // Info 日志
 
 func Info(format string, a ...interface{}) {
 	out := "INFO: " + fmt.Sprintf(format, a...)
-	logs = append(logs, log{Info: out, Type: "info"})
 	color.Green(out)
+	WriteLog(out, "INFO: ")
+
 }
 
 // Error 日志
 func Error(err error, info ...string) {
 	out := "ERROR: " + fmt.Sprint(info) + " " + err.Error()
-	logs = append(logs, log{Info: out, Type: "error"})
 	color.Red(out)
+	WriteLog(out, "ERROR: ")
 }
 
 // Warning 日志
 func Warning(info string) {
 	out := "WARNING: " + info
-	logs = append(logs, log{Info: out, Type: "warning"})
 	color.Yellow(out)
+	WriteLog(out, "WARNING: ")
 }
 
 func Debug(info ...interface{}) {
 	out := "DEBUG: " + fmt.Sprint(info)
-	logs = append(logs, log{Info: out, Type: "debug"})
 	color.Blue(out)
+	WriteLog(out, "DEBUG: ")
 }
 
-// WriteLog 定期写入日志文件
-func WriteLog() {
-	logfile, err := os.OpenFile("log.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+// WriteLog 写入日志文件
+func WriteLog(log, logType string) {
+	// 写入文件
+	_, err := logFile.WriteString(time.Now().Format("2006-01-02 15:04:05") + log + "\n")
 	if err != nil {
-		fmt.Println("打开文件失败")
+		fmt.Println(err)
 		return
 	}
-	for _, logItem := range logs {
-		_, err = logfile.WriteString(logItem.Info + "\n")
-		if err != nil {
-			return
-		}
-	}
-	err = logfile.Close()
-	if err != nil {
-		return
-	}
-	logs = []log{}
 }

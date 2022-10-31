@@ -21,7 +21,7 @@ func DailyTask() {
 	// 预约时间更新
 	app.ReserveTime = time.Now().AddDate(0, 0, 1)
 	// 登录
-	app.Login()
+	go app.Login()
 
 }
 
@@ -48,7 +48,7 @@ func LoginCheck() {
 	isExpire := app.CheckLoginExpire()
 	if isExpire {
 		log.Warning("登录已过期 尝试重新登陆...")
-		app.Login()
+		go app.Login()
 	}
 }
 

@@ -220,6 +220,7 @@ func Login() {
 	}
 	SaveUserConfig(userInfoConf)
 	log.Info("用户信息已保存至userInfo.json")
+	ReloadUserConfig()
 }
 
 // CheckLoginExpire 检查登录是否过期
