@@ -1,3 +1,50 @@
-# qlu-lib-reservation-go
+# 齐鲁工业大学图书馆预约工具
 
-library reservation tool for Qlu Edu
+Go预约实现的齐鲁工业大学图书馆预约工具
+
+一个golang练手小工具 
+
+## Features
+
+- 😃 简单  不需要任何开发环境 下载运行即可
+- 📑 座位选择  选择任意你想要预约的座位
+- 🎉 随机座位  支持随机座位预约
+- 👀 验证码识别  支持在线识别和本地识别
+- 🌏 校园网自动认证  避免零点断网问题
+- ☁️ 易部署  配置完毕后 你可以部署在服务器，arm盒子，甚至是路由器上（需校园网）
+
+## Usage
+
+在[Releases](https://github.com/zskzskabcd/qlu-lib-reservation-go/releases)页下载适用系统版本即可
+
+如使用本地验证码识别  则附带下载ocr.zip
+
+#### 验证码识别配置
+
+如果选择在线识别的方式 则可以前往[超级鹰](https://www.chaojiying.com/)官网，注册账号并购买相应的资源包。然后记录下软件ID和Key 在程序中配置即可
+
+如果选择本地识别  则下载ocr.zip 解压在程序目录  然后配置识别模式为本地识别。
+
+> 本地识别使用tesseract ocr方案，识别成功率约10%-20%。因为登录是两小时一次所以并不会有较大影响。
+
+#### 服务模式
+
+服务模式将直接进行等待预约 不显示菜单
+
+要使用服务模式 则在运行时加上service参数即可
+
+如：
+
+```bash
+./main.exe service
+```
+
+或者一个简单的bat脚本
+
+```bash
+@echo off
+echo --------------服务模式--------------
+.\main.exe service
+pause
+```
+
